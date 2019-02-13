@@ -7,7 +7,7 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      articles: json['articles'].map((value) => new Articles.fromJson(value)).toList(),
+      articles: (json['articles'] as List).map((value) => new Articles.fromJson(value)).toList(),
     );
   }
 }
