@@ -27,77 +27,80 @@ class Bitcoin extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: FutureBuilder<Post>(
-          future: post,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                  itemExtent: 150,
-                  itemCount: snapshot.data.articles.length,
-                  itemBuilder: (BuildContext context, int index){
-                    var dataStored = "";
-                    var imageUrl = "";
-                    dataStored = snapshot.data.articles[index].title;
-                    var finalData = "";
-                    if(dataStored.length < 80){
-                      finalData = dataStored;
-                    } else {
-                      finalData = dataStored.substring(0,80) + "...";
-                    }
-                    if(snapshot.data.articles[index].urlToImage == null){
-                      imageUrl = 'assets/placeholder';
-                    }
-                    else{
-                      imageUrl = snapshot.data.articles[index].urlToImage;
-                    }
-                    return Padding(padding: EdgeInsets.all(10),
-                        child: Card(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Flexible(
-                                    child: ListTile(
-                                      leading: Image(
-                                        image: NetworkImage(
-                                          imageUrl,
+      body: RefreshIndicator(
+        onRefresh: fetchPostBitcoin,
+        child: Center(
+          child: FutureBuilder<Post>(
+            future: post,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    itemExtent: 150,
+                    itemCount: snapshot.data.articles.length,
+                    itemBuilder: (BuildContext context, int index){
+                      var dataStored = "";
+                      var imageUrl = "";
+                      dataStored = snapshot.data.articles[index].title;
+                      var finalData = "";
+                      if(dataStored.length < 80){
+                        finalData = dataStored;
+                      } else {
+                        finalData = dataStored.substring(0,80) + "...";
+                      }
+                      if(snapshot.data.articles[index].urlToImage == null){
+                        imageUrl = 'assets/placeholder';
+                      }
+                      else{
+                        imageUrl = snapshot.data.articles[index].urlToImage;
+                      }
+                      return Padding(padding: EdgeInsets.all(10),
+                          child: Card(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Flexible(
+                                      child: ListTile(
+                                        leading: Image(
+                                          image: NetworkImage(
+                                            imageUrl,
+                                          ),
+                                          height: 110,
+                                          width: 110,
+                                          fit: BoxFit.fill,
                                         ),
-                                        height: 110,
-                                        width: 110,
-                                        fit: BoxFit.fill,
-                                      ),
-                                      title: Text(
-                                        finalData,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                        title: Text(
+                                          finalData,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      onTap: (){
-                                        Navigator.push(context,
-                                            new MaterialPageRoute(
-                                                builder: (context) {
-                                                  var article = snapshot.data.articles[index];
-                                                  return DetailPage(title: article.title, image: article.urlToImage, author: article.author, description: article.description, url: article.url);
-                                                }
-                                            )
-                                        );
-                                      },
-                                    )
-                                )
-                              ],
-                            )
-                        )
-                    );}
-              );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-            // By default, show a loading spinner
-            return CircularProgressIndicator();
-          },
+                                        onTap: (){
+                                          Navigator.push(context,
+                                              new MaterialPageRoute(
+                                                  builder: (context) {
+                                                    var article = snapshot.data.articles[index];
+                                                    return DetailPage(title: article.title, image: article.urlToImage, author: article.author, description: article.description, url: article.url);
+                                                  }
+                                              )
+                                          );
+                                        },
+                                      )
+                                  )
+                                ],
+                              )
+                          )
+                      );}
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              // By default, show a loading spinner
+              return CircularProgressIndicator();
+            },
+          ),
         ),
-      ),
+      )
     );
   }
 }
