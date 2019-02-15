@@ -15,8 +15,7 @@ class Navigation extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Drawer(
+    return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -134,7 +133,6 @@ class Navigation extends StatelessWidget{
             ),
           ],
         ),
-      ),
     );
   }
 
