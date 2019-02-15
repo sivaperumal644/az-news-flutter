@@ -1,3 +1,5 @@
+import 'package:az_news_flutter/screens/about/about.dart';
+import 'package:az_news_flutter/screens/home/menu_constants.dart';
 import 'package:flutter/material.dart';
 import 'tabs/technology/technology_post.dart';
 import 'tabs/general/general_post.dart';
@@ -20,6 +22,29 @@ class HomePage extends StatelessWidget{
               appBar: AppBar(
                 backgroundColor: Colors.redAccent[700],
                 title: Text('az news'),
+                actions: <Widget>[
+                  PopupMenuButton<String>(
+                    onSelected: (String choice){
+                      if(choice == Constants.aboutApp) {
+                        Navigator.push(context,
+                            new MaterialPageRoute(
+                                builder: (context) {
+                                  return About();
+                                }
+                            )
+                        );
+                      }
+                    },
+                    itemBuilder: (BuildContext context){
+                      return Constants.choices.map((String choice){
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                  )
+                ],
                 bottom: TabBar(
                   isScrollable: true,
                   indicatorColor: Colors.white,

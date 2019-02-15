@@ -12,14 +12,13 @@ class DetailPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    var shortDescription;
 
     String checkDescription() {
       if (description.length > 200) {
-        return shortDescription = description.substring(0, 200) + "...";
+        return description.substring(0, 200) + "...";
       }
       else {
-        return shortDescription = description;
+        return description;
       }
     }
 
@@ -32,11 +31,26 @@ class DetailPage extends StatelessWidget{
       }
     }
 
+    String checkImageUrl(){
+      if(image == null){
+        return 'assets/placeholder.png';
+      }
+      else{
+        return image;
+      }
+    }
+
     launchURL() async {
-      if (await canLaunch(Uri.encodeComponent(url))) {
+      /*if (await canLaunch(Uri.encodeComponent(url))) {
         await launch(Uri.encodeComponent(url));
       } else {
         throw 'Could not launch';
+      }*/
+      if(await canLaunch(url)) {
+        await launch(url);
+      }
+      else{
+        throw 'could not launch';
       }
     }
 
@@ -50,7 +64,7 @@ class DetailPage extends StatelessWidget{
                 child: Column(
                   children: <Widget>[
                     Image(
-                      image: NetworkImage(image),
+                      image: NetworkImage(checkImageUrl()),
                       width: 350,
                       height: 250,
                       fit: BoxFit.fill,

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:az_news_flutter/screens/about/about.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Navigation extends StatelessWidget{
+  
+  selectedUrlLaunch(String url) async{
+    if(await canLaunch(url)) {
+      await launch(url);
+    }
+    else{
+      throw 'cannot open';
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +129,7 @@ class Navigation extends StatelessWidget{
                 // ...
                 // Then close the drawer
                 Navigator.pop(context);
+                selectedUrlLaunch('https://github.com/sivaperumal644');
               },
             ),
           ],

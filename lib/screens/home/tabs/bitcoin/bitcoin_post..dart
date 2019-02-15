@@ -48,7 +48,7 @@ class Bitcoin extends StatelessWidget{
                         finalData = dataStored.substring(0,80) + "...";
                       }
                       if(snapshot.data.articles[index].urlToImage == null){
-                        imageUrl = 'assets/placeholder';
+                        imageUrl = 'assets/placeholder.png';
                       }
                       else{
                         imageUrl = snapshot.data.articles[index].urlToImage;
