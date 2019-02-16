@@ -55,6 +55,7 @@ class Navigation extends StatelessWidget{
                 );
               },
             ),
+            Divider(),
             ListTile(
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -88,6 +89,7 @@ class Navigation extends StatelessWidget{
                 Navigator.pop(context);
               },
             ),
+            Divider(),
             ListTile(
               title: Row(
                 children: <Widget>[
@@ -109,6 +111,7 @@ class Navigation extends StatelessWidget{
                 Navigator.pop(context);
               },
             ),
+            Divider(),
             ListTile(
               title: Row(
                 children: <Widget>[
@@ -131,6 +134,7 @@ class Navigation extends StatelessWidget{
                 selectedUrlLaunch('https://github.com/sivaperumal644');
               },
             ),
+            Divider(),
           ],
         ),
     );
