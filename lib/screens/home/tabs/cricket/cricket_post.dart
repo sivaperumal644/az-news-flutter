@@ -39,12 +39,19 @@ class Cricket extends StatelessWidget{
                     itemCount: snapshot.data.articles.length,
                     itemBuilder: (BuildContext context, int index){
                       var dataStored = "";
+                      var imageUrl = "";
                       dataStored = snapshot.data.articles[index].title;
                       var finalData = "";
                       if(dataStored.length < 80){
                         finalData = dataStored;
                       } else {
                         finalData = dataStored.substring(0,80) + "...";
+                      }
+                      if(snapshot.data.articles[index].urlToImage == null){
+                        imageUrl = 'assets/placeholder';
+                      }
+                      else{
+                        imageUrl = snapshot.data.articles[index].urlToImage;
                       }
                       return Padding(padding: EdgeInsets.all(10),
                           child: Card(
@@ -55,7 +62,7 @@ class Cricket extends StatelessWidget{
                                       child: ListTile(
                                         leading: Image(
                                           image: NetworkImage(
-                                            snapshot.data.articles[index].urlToImage,
+                                            imageUrl,
                                           ),
                                           height: 110,
                                           width: 110,
