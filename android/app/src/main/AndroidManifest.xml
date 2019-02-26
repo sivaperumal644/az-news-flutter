@@ -15,7 +15,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="az_news_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/az_new_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
